@@ -1,0 +1,124 @@
+header {
+    height: 12vh;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgb(194, 194, 194);
+    
+}
+
+header a {
+    height: 100%;
+}
+header ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 25px;
+}
+
+header li {
+    cursor: pointer;
+    color: rgb(240, 240, 240);
+    font-size: 1em;
+    font-weight: 571;
+}
+
+header li:hover{
+    color: rgb(207, 207, 207);
+}
+
+header li:active{
+    color: rgb(218, 147, 240);
+}
+
+.header-button {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+
+    background-image: url(./../assets/options.png);
+    background-color: rgba(240, 240, 240, 0.363);
+
+    border-radius: 10px;
+}
+
+header input{
+    padding: 0px 5px;
+    border: 3px solid rgba(236, 236, 236, 0.473);
+    border-radius: 50px;
+    font-size: 1em;
+}
+
+
+
+
+
+/* ----- non mobile media queries -----*/
+
+@media (width > 415px) {
+    header li {
+        display: block;
+    }
+
+    .header-button {
+        display: none;
+    }
+
+    .header input{
+        font-size: 1em;
+        min-width: 20vw;
+    };
+}
+
+
+
+/* ----- non specific media queries -----*/
+
+@media (width <= 900px) {
+    .header{
+        height: 11vh;
+    }
+}
+
+
+/* ----- mobile media queries -----*/
+
+@media (width <= 480px) {
+    header li {
+        display: none;
+    }
+
+    header ul {
+        display: none;
+    }
+    
+    .header-button {
+        display: block;
+    }
+
+    header{
+        height: 10vh;
+        padding: 1px 20px;
+    }
+
+    .header-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header input{
+        font-size: 1.3em;
+        max-width: 180px;
+    };
+
+    .header-shortbackground{
+        border-bottom: 0;
+        background-image: none;
+    }
+}
