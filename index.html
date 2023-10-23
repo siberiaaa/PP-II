@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=, initial-scale=1.0" />
-        <title>Songs</title>
+        <title>Your songs</title>
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="styles/header.css" />
         <link rel="stylesheet" href="styles/footer.css">
+        <link rel="stylesheet" href="styles/tables.css">
+        <link rel="stylesheet" href="styles/yoursongs.css">
     </head>
     <body>
         <header>
@@ -16,7 +18,7 @@
                 <img src="assets/KAI_WALK.gif"
             /></a>
             <ul>
-                <li>Inicio</li>
+                <li>Home</li>
                 <li>Global songs</li>
                 <li>Sign out</li>
             </ul>
@@ -25,7 +27,40 @@
             /></a>
         </header>
 
-        <main></main>
+        <main class="yoursongs">
+            <section class="search">
+                <div class="search-box">
+                <button class="btn-search"><i class="fas fa-search"></i>
+                    <label for="search"><input class="input-search" type="text" name="search" placeholder="Add song"></label>
+                </div>
+            </section>
+            <section>
+                <h1>Your songs</h1>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Rating</th>
+                        <th>Global ratings</th>
+                        <th>Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>a name</td>
+                        <td>an author</td>
+                        <td>1000</td>
+                        <td>1000</td>
+                        <td><a href="" draggable="false"><img src="assets/star.png" draggable="false"/></a>
+                            <a href="" draggable="false"><img src="assets/trash.png" draggable="false"/></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </section>
+
+            
+        </main>
         <footer>
             <section>
                 <ul>

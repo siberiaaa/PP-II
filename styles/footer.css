@@ -1,5 +1,5 @@
 footer{
-    height: 30vh;
+    height: 20vh;
     width: 100%;
     box-sizing: border-box;
     padding: 1vh 0px;
@@ -20,8 +20,8 @@ footer h1, footer h3, footer h4{
 
 
 footer h3{
-    font-size: 0.8em;
-    font-weight: 500;
+    font-size: 0.6em;
+    font-weight: 600;
 }
 footer h4{
     font-size: 0.6em;
@@ -69,8 +69,8 @@ footer section li > img{
 }
 
 #footer-logo{
-    height: 200px;
-    width: 200px;
+    height: 110px;
+    width: 110px;
 }
 
 
@@ -105,7 +105,7 @@ footer hr{
 
 @media (width <= 480px) {
     footer{
-        height: 45vh;
+        height: 25vh;
     }
 
     footer section:first-child{
@@ -123,12 +123,9 @@ footer hr{
     }
 
     footer h3{
-        font-size: 1.2em;
+        font-size: 1em;
     }
     footer h4{
         font-size: 0.8em;
-    }
-    #footer-logo{
-        display: none;
     }
 }
