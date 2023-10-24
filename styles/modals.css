@@ -1,0 +1,253 @@
+:root{
+    --displaymodal: none;
+    --displayspinner: none;
+
+}
+
+/* --- modal spinner ---*/
+
+article.modalspinner{
+    display: var(--displayspinner); 
+    justify-content: center;
+    align-items: center;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.485);
+
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.spinner {
+    display: inline-block;
+    border: 10px solid rgba(255, 255, 255, 0.199);
+    border-left-color: #b255ff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+
+article.modal{
+    display: var(--displaymodal); 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.485);
+
+    animation-name: opacity;
+    animation-duration: 0.4s;
+
+    position: fixed; 
+    align-items: center;
+    justify-content: center;
+
+}
+
+@keyframes opacity {
+    from {opacity: 0}
+    to {opacity: 1}
+  }
+
+.modal-content{
+    box-sizing: content-box;
+    background-color: rgb(240, 240, 240);
+    width: 45vw;
+    height: 35vh;
+    padding: 10px;
+
+    font-size: 1em;
+
+}
+
+/* ----- modal header menu mobile -----*/
+section.headermenu{
+    height: auto;
+    margin-left: auto; /*especie de justify-self?*/
+    align-self: flex-start;
+    border-bottom-left-radius: 10px;
+}
+
+.headermenu ul{
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.headermenu li{
+    cursor: pointer;
+    padding: 15px;
+    font-size: 2em;
+    border-bottom: 1.5px solid rgb(170, 170, 170);
+}
+
+.headermenu li:hover{
+    background-color: rgb(231, 231, 231);
+}
+
+.headermenu li:active{
+    background-color: rgb(214, 214, 214);
+}
+
+
+/* ----- modal messagebox -----*/
+
+.modal-content.messagebox{
+    width: 40vw;
+    height: 20vh;
+
+    padding: 2vw;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 3vh;
+    align-items: center;
+}
+
+.messagebox h1{
+    font-size: 2em;
+}
+
+.messagebox a{
+    width: 70%;
+    background: linear-gradient(150deg, rgb(138, 43, 234), rgb(235, 54, 243));
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+
+    font-size: 1.2em;
+    color: rgb(236, 235, 235);
+    text-decoration: none;
+    text-align: center;
+}
+
+.messagebox a:hover{
+    filter: brightness(90%);
+}
+
+.messagebox a:active{
+    filter: brightness(70%);
+}
+
+
+/*non specific media queries*/
+
+@media (width <= 955px) {
+    .modal-content.messagebox{
+        width: 60vw;
+        height: 22.5vh;
+    }
+}
+
+/*mobile media queries*/
+
+@media (width <= 480px) {
+    .modal-content.messagebox{
+        width: 80vw;
+        height: 25vh;
+    }
+}
+
+
+
+/* ----- modal error -----*/
+.modal-content.messagebox.error {
+    height: 35vh;
+}
+.modal-content.messagebox.error a{
+    background: linear-gradient(150deg, rgb(234, 43, 43), rgb(243, 54, 186));
+}
+
+/*non specific media queries*/
+
+@media (width <= 955px) {
+    .modal-content.messagebox.error{
+        width: 60vw;
+        height: 25vh;
+    }
+}
+
+/*mobile media queries*/
+
+@media (width <= 480px) {
+    .modal-content.messagebox.error{
+        width: 80vw;
+        height: 30vh;
+    }
+}
+
+
+/* ----- modal form -----*/
+.modal-content.article-form {
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background: rgba(255, 255, 255, 0.781);
+    border-radius: 20px;
+    
+}
+
+.modal-content.article-form form {
+    row-gap: 20px;
+}
+
+.modal-content.article-form form input{
+    background: rgb(241, 241, 241);
+}
+
+/*non specific media queries*/
+
+@media (width <= 955px) {
+
+    }
+
+
+/*mobile media queries*/
+
+@media (width <= 480px) {
+
+}
+
+
+
+
+
+/* ----- non specific media queries -----*/
+
+@media (width <= 955px) {
+    .modal-content{
+        width: 70vw;
+        height: 40vh;
+    }
+}
+
+
+
+/* ----- mobile media queries -----*/
+
+@media (width <= 480px) {
+    .modal-content{
+        width: 70vw;
+        height: 40vh;
+    }
+}

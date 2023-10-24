@@ -1,0 +1,36 @@
+main {
+    background-color: rgb(15, 15, 15);
+}
+.home section {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 5vh;
+    align-items: center;
+}
+
+.home h1 {
+    color: rgb(235, 235, 235);
+}
+
+.home button {
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    border: 2px solid #353535;
+    padding: 16px 32px;
+    font-size: 0.8em;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.home button:hover {
+    background-color: #3d3d3d;
+    color: white;
+}
+
+.home button:active {
+    background-color: #252525;
+}

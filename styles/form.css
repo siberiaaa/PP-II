@@ -1,0 +1,111 @@
+form{
+    height: 100%;
+    box-sizing: border-box;
+
+    padding: 10px 10px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 20px;
+    
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form h1{
+    font-weight: 300;
+}
+form label{
+    width: 70%;
+}
+
+form label input{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 0.8em;
+
+    background-color: rgb(221, 220, 220);
+    border: 0;
+    border-radius: 10px;
+
+}
+
+.button-form{
+    width: 50%;
+    background: linear-gradient(150deg, rgb(236, 191, 41), rgb(243, 145, 54));
+    border-radius: 10px;
+    padding: 5px;
+
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-align: center;
+}
+
+.button-form:hover{
+    filter: brightness(90%);
+}
+
+.button-form:active{
+    filter: brightness(110%);
+}
+
+form p{
+    font-size: 0.7em;
+}
+
+.link-form:visited{
+    color: black;
+}
+
+
+/* ----- non specific media queries -----*/
+
+@media (width <= 900px) {
+    form h1{
+        font-size: 2em;
+    }
+
+    form label input{
+        font-size: 1.5em;      
+    }
+
+    .button-form{
+        font-size: 1.5em;    
+    }
+    form p{
+        font-size: 1em;
+    }
+
+}
+
+/* ----- mobile media queries -----*/
+
+@media (width <= 480px) {
+    form form{
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    form label input{
+        background-color: rgb(255, 255, 255);
+        font-size: 1.3em;
+    }
+
+    form h1, form p, .link-form, .link-form:visited{
+        color: rgb(255, 255, 255);
+    }
+
+    .button-form{
+        background: rgb(255, 255, 255);
+        color: black;
+        width: 50%;
+        border-radius: 20px;
+    }
+
+    form h1{
+        font-size: 2em;
+    }
+
+}
