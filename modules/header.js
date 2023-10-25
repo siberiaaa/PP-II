@@ -1,3 +1,5 @@
+import {OpenModalOptions} from './modals.js';
+
 export function LoadAnyHeader(){
     if(localStorage.getItem('pseudotoken') == null){
         LoadHeaderNoLogged();
@@ -66,7 +68,7 @@ function LoadHeader(li3, li4){
     imgOptions.setAttribute('draggable', 'false');
     a1.addEventListener('click', (e) => {
         e.preventDefault();
-        modal.OpenModalOptions(); //TODO:
+        OpenModalOptions();
     });
 
     ul.appendChild(li1);

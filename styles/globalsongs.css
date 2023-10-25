@@ -1,0 +1,11 @@
+.globalsongs h1{
+    color: rgb(235, 235, 235);
+}
+
+.globalsongs section{
+    width: 100%;
+}
+
+.globalsongs section.search{
+    height: 14vh;
+}

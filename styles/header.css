@@ -30,11 +30,11 @@ header li {
 }
 
 header li:hover{
-    color: rgb(207, 207, 207);
+    color: rgb(94, 93, 93);
 }
 
 header li:active{
-    color: rgb(218, 147, 240);
+    color: rgb(29, 29, 29)
 }
 
 .header-button {
@@ -54,8 +54,6 @@ header input{
     border-radius: 50px;
     font-size: 1em;
 }
-
-
 
 
 

@@ -64,6 +64,13 @@ form p{
 /* ----- non specific media queries -----*/
 
 @media (width <= 900px) {
+    .signup section{
+        width: 70vw;
+    }
+    .login section{
+        width: 70vw;
+    }
+
     form h1{
         font-size: 2em;
     }
@@ -84,7 +91,15 @@ form p{
 /* ----- mobile media queries -----*/
 
 @media (width <= 480px) {
-    form form{
+    .signup section{
+        width: 95vw;
+    }
+
+    .login section{
+        width: 95vw;
+    }
+
+    form{
         background-color: rgba(255, 255, 255, 0);
     }
 

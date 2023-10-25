@@ -128,7 +128,7 @@ section.headermenu{
 
 .messagebox a{
     width: 70%;
-    background: linear-gradient(150deg, rgb(138, 43, 234), rgb(235, 54, 243));
+    background: linear-gradient(150deg, rgb(226, 208, 40), rgb(243, 130, 54));
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
@@ -173,7 +173,7 @@ section.headermenu{
     height: 35vh;
 }
 .modal-content.messagebox.error a{
-    background: linear-gradient(150deg, rgb(234, 43, 43), rgb(243, 54, 186));
+    background: linear-gradient(150deg, rgb(235, 24, 24), rgb(243, 123, 54));
 }
 
 /*non specific media queries*/

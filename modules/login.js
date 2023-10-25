@@ -1,10 +1,14 @@
 import * as footer from "./footer.js";
 import * as header from "./header.js";
+import * as modals from "./modals.js"; 
 
 document.addEventListener("DOMContentLoaded", () => {
     header.LoadAnyHeader();
     footer.LoadFooter();
 });
+
+const buttonLogin = document.querySelector('a.button-form')
+buttonLogin.addEventListener('click', (e) => {LogIn(e)}); 
 
 async function LogInAPI(user, pass) {
     const response = await fetch(
@@ -19,7 +23,7 @@ async function LogInAPI(user, pass) {
     );
 
     if (response.status >= 500 && response.status <= 599) {
-        OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -28,13 +32,14 @@ async function LogInAPI(user, pass) {
     if (data["success"]) {
         return data["id"];
     } else {
-        OpenModalError(data["message"]);
+        modals.OpenModalError(data["message"]);
         return null;
     }
 }
 
 async function LogIn(e) {
     e.preventDefault();
+    
     const form = document.querySelector("form");
     const data = new FormData(form);
 
@@ -42,16 +47,16 @@ async function LogIn(e) {
     const pass = data.get("password");
 
     if (!user || !pass) {
-        OpenModalError("Fill all fields");
+        modals.OpenModalError("Fill all fields");
         return;
     }
 
-    const id = await LogInAPI(email, pass);
+    const id = await LogInAPI(user, pass);
 
     if (id != null) {
         form.reset();
         localStorage.setItem("pseudotoken", id);
-        OpenModalButton("Logged in successfully", main.Load);
+        modals.OpenModalButtonHref("Logged in successfully", './../index.html');
     }
 
 }

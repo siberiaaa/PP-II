@@ -6,7 +6,7 @@ export function LoadFooter(){
     const ul = document.createElement('ul');
 
     const li1 = document.createElement('li');
-    const a1 = document.createElement('a1');
+    const a1 = document.createElement('a');
     a1.setAttribute('href', 'https://cdn.discordapp.com/attachments/945837265593192499/1164992910425595974/1697826347808.jpg?ex=65453b32&is=6532c632&hm=a7fa6195635aca6e7fbde2d2a63060129a264bf043ac0a63ba1a3e8bb41dcc79&');
     const img = document.createElement('img');
     if(document.title == 'Home'){

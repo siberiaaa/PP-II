@@ -17,7 +17,7 @@ function CreateModal(){
     body.prepend(modal);
 }
 
-export function OpenModalButton(message, button){
+export function OpenModalButtonHref(message, href){
     CreateModal();
     const modalContent = document.querySelector('.modal-content');
     modalContent.classList.add('messagebox');
@@ -29,7 +29,7 @@ export function OpenModalButton(message, button){
     const a = document.createElement('a');
     a.innerHTML = 'Aceptar';
     a.addEventListener('click', () => {
-        button();
+        location.href = href;
         document.documentElement.style.setProperty('--displaymodal', 'none')
     });
 
@@ -52,7 +52,7 @@ export function OpenModalAceptarReload(message){
     a.innerHTML = 'Aceptar';
     a.addEventListener('click', () => {
         document.documentElement.style.setProperty('--displaymodal', 'none')
-        main.Load();
+        location.href = './../index.html';
     });
 
     modalContent.appendChild(a);
@@ -103,7 +103,7 @@ export function OpenModalErrorReload(message){
     a.innerHTML = 'Aceptar';
     a.addEventListener('click', () => {
         document.documentElement.style.setProperty('--displaymodal', 'none');
-        main.Load();
+        location.href = './../index.html';
     });
 
     modalContent.appendChild(a);
@@ -125,41 +125,66 @@ export function OpenModalOptions(){
     const modal = document.querySelector('.modal');
     modal.addEventListener('click', () => {document.documentElement.style.setProperty('--displaymodal', 'none')});
 
-    const liInicio = document.querySelectorAll('.modal-content li')[0];
-    liInicio.addEventListener('click', (e) => {
+    const liHome = document.querySelectorAll('.modal-content li')[0];
+    liHome.addEventListener('click', (e) => {
         e.preventDefault();
-        headers.OpenInicio();
+        if(document.title == 'Home'){
+            location.href = 'index.html';
+        }else{
+            location.href = './../index.html';
+        }
     });
 
-    const liVerPropiedades = document.querySelectorAll('.modal-content li')[1];
-    liVerPropiedades.addEventListener('click', (e) => {
+    const liGlobalSongs = document.querySelectorAll('.modal-content li')[1];
+    liGlobalSongs.addEventListener('click', (e) => {
         e.preventDefault();
-        headers.OpenVerPropiedades();
+        if(document.title == 'Home'){
+            location.href = './html/globalsongs.html';
+        }else{
+            location.href = './globalsongs.html';
+        }
     });
 
     const li3 = document.querySelectorAll('.modal-content li')[2];
-    if(li3.innerHTML == 'Iniciar sesion'){
+    if(li3.innerHTML == 'Log in'){
         li3.addEventListener('click', (e) => {
             e.preventDefault();
-            headers.OpenIniciarSesion();
+            if(document.title == 'Home'){
+                location.href = './html/login.html';
+            }else{
+                location.href = './login.html';
+            }
         });
     } else{
         li3.addEventListener('click', (e) => {
             e.preventDefault();
-            headers.OpenVerPerfil();
+            if(document.title == 'Home'){
+                location.href = './html/yoursongs.html';
+            }else{
+                location.href = './yoursongs.html';
+            }
         });
     }
 
     const li4 = document.querySelectorAll('.modal-content li')[3];
-    if(li4.innerHTML == 'Registrarse'){
+    if(li4.innerHTML == 'Sign up'){
         li4.addEventListener('click', (e) => {
             e.preventDefault();
-            headers.OpenRegistrarse();
+            if(document.title == 'Home'){
+                location.href = './html/signup.html';
+            }else{
+                location.href = './signup.html';
+            }
         });
     } else{
         li4.addEventListener('click', (e) => {
             e.preventDefault();
-            headers.OpenCerrarSesion();
+            localStorage.removeItem('pseudotoken');
+        if(document.title == 'Home'){
+            location.href = 'index.html';
+        }else{
+            location.href = './../index.html';
+        }
         });
     }
 
