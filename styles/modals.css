@@ -1,3 +1,5 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 :root{
     --displaymodal: none;
     --displayspinner: none;
@@ -251,3 +253,56 @@ section.headermenu{
         height: 40vh;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+/*----------------- rate prestado por ahí con estrellitas ------------------*/
+.rating {
+    border: none;
+    float: left;
+  }
+  
+  .rating > label {
+    color: #90A0A3;
+    float: right;
+  }
+  
+  .rating > label:before {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    content: "\f005";
+    display: inline-block;
+  }
+  
+  .rating > input {
+    display: none;
+  }
+  
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #F79426;
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label,
+  .rating > input:checked ~ label:hover ~ label {
+    color: #FECE31;
+  }
+
+
+  section.messagebox.rate {
+    padding: 30px 35px;
+    height: auto;
+    width: auto;
+  }

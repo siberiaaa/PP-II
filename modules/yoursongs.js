@@ -2,6 +2,7 @@ import * as footer from './footer.js';
 import * as header from './header.js';
 import * as modals from "./modals.js";
 
+
 document.addEventListener('DOMContentLoaded', () => {
     header.LoadAnyHeader();
     footer.LoadFooter();
@@ -35,7 +36,7 @@ async function LoadSongsAPI(userid) {
     }
 }
 
-async function GetSongAPI(songid){
+export async function GetSongAPI(songid){
     const response = await fetch(
         "https://sa-east-1.aws.data.mongodb-api.com/app/musicapp-clxou/endpoint/getSong",
         {
@@ -111,6 +112,15 @@ function AddSongTable(id, name, author, rating, globalrating){
     img1.src = './../assets/star.png'; 
     img1.setAttribute('draggable', 'false');
     a1.appendChild(img1);
+    a1.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const pseudotoken = localStorage.getItem('pseudotoken');
+        if(localStorage.getItem('pseudotoken') == null){
+            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            return;
+        }
+        modals.OpenModalRate(pseudotoken, id)})
 
     const a2 = document.createElement('a');
     a2.setAttribute('href', '');
@@ -119,6 +129,13 @@ function AddSongTable(id, name, author, rating, globalrating){
     img2.src = './../assets/trash.png'; 
     img2.setAttribute('draggable', 'false');
     a2.appendChild(img2);
+    a2.addEventListener('click', (e) => {
+        const pseudotoken = localStorage.getItem('pseudotoken');
+        if(localStorage.getItem('pseudotoken') == null){
+            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            return;
+        }
+        DeleteSong(e, pseudotoken, id)})
 
     td5.appendChild(a1);
     td5.appendChild(a2);
@@ -131,4 +148,81 @@ function AddSongTable(id, name, author, rating, globalrating){
 
     const tbody = document.querySelector('tbody');
     tbody.appendChild(tr);
+}
+
+async function DeleteSong(e, userid, songid){
+    e.preventDefault();
+
+    const deleted = await DeleteSongAPI(userid, songid);
+  
+    if (deleted) {
+        modals.OpenModalButtonHref('Deleted successfully', './yoursongs.html');
+    }
+
+}
+
+async function DeleteSongAPI(userid, songid){
+    const response = await fetch(
+        "https://sa-east-1.aws.data.mongodb-api.com/app/musicapp-clxou/endpoint/usersongremove",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({'userid': userid, 'songid': songid}),
+        }
+    );
+
+    if (response.status >= 500 && response.status <= 599) {
+        modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        return;
+    }
+
+    const data = await response.json();
+
+    if (data["success"]) {
+        return true;
+    } else {
+        modals.OpenModalError(data["message"]);
+        return null;
+    }
+}
+
+
+export async function RateSong(userid, songid, rating){
+    console.log('holaaaa', userid, songid, rating)
+    /*
+    const rated = await DeleteSongAPI(userid, songid);
+  
+    if (rated) {
+        modals.OpenModalButtonHref('Rated successfully', './yoursongs.html');
+    }
+*/
+}
+
+async function RateSongAPI(userid, songid, rating){
+    const response = await fetch(
+        "https://sa-east-1.aws.data.mongodb-api.com/app/musicapp-clxou/endpoint/usersongrate",
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({'userid': userid, 'songid': songid, 'rating': rating}),
+        }
+    );
+
+    if (response.status >= 500 && response.status <= 599) {
+        modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        return;
+    }
+
+    const data = await response.json();
+
+    if (data["success"]) {
+        return true;
+    } else {
+        modals.OpenModalError(data["message"]);
+        return null;
+    }
 }
