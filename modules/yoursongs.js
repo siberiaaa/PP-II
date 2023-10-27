@@ -3,7 +3,7 @@ import * as header from './header.js';
 import * as modals from "./modals.js";
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { //dios
     header.LoadAnyHeader();
     footer.LoadFooter();
     LoadSongs();
@@ -112,7 +112,7 @@ function AddSongTable(id, name, author, rating, globalrating){
     img1.src = './../assets/star.png'; 
     img1.setAttribute('draggable', 'false');
     a1.appendChild(img1);
-    a1.addEventListener('click', (e) => {
+    a1.addEventListener('click', async (e) => {
         e.preventDefault();
 
         const pseudotoken = localStorage.getItem('pseudotoken');
@@ -120,7 +120,10 @@ function AddSongTable(id, name, author, rating, globalrating){
             modals.OpenModalErrorReload(`You must be logged to perform this action.`);
             return;
         }
-        modals.OpenModalRate(pseudotoken, id)})
+        const valuesfromodal = await modals.OpenModalRate(pseudotoken, id);
+        console.log(valuesfromodal);
+    });
+        
 
     const a2 = document.createElement('a');
     a2.setAttribute('href', '');
@@ -189,7 +192,7 @@ async function DeleteSongAPI(userid, songid){
 }
 
 
-export async function RateSong(userid, songid, rating){
+export  async function RateSong(userid, songid, rating){
     console.log('holaaaa', userid, songid, rating)
     /*
     const rated = await DeleteSongAPI(userid, songid);
