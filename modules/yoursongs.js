@@ -227,6 +227,11 @@ async function RateSong(songid){
 
         const ratingfromodal = await modals.OpenModalRate();
         
+        if (ratingfromodal == null) {
+            return;
+        }
+
+
         modals.SpinnerOn();
         const rated = await RateSongAPI(pseudotoken, songid, ratingfromodal);
         modals.SpinnerOff();

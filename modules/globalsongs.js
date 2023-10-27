@@ -197,10 +197,16 @@ async function AddGlobalSong(){
         }
 
         const songfromodal = await modals.OpenModalAddSong('', '');
+        
+        if (songfromodal == null) {
+            return;
+        }
+
         modals.SpinnerOn();
         const added = await AddGlobalSongAPI(pseudotoken, songfromodal['namesong'], songfromodal['authorsong']);
         modals.SpinnerOff();
 
+    
     if (added) {
         modals.OpenModalButtonHref('Added successfully', './globalsongs.html');
     }
@@ -254,6 +260,10 @@ async function EditSong(songid, name, author){
         modals.SpinnerOff();
 
         const songfromodal = await modals.OpenModalAddSong(name, author);
+
+        if (songfromodal == null) {
+            return;
+        }
 
         modals.SpinnerOn();
         const added = await EditSongAPI(pseudotoken, songid, songfromodal['namesong'], songfromodal['authorsong']);

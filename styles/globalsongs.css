@@ -48,6 +48,15 @@
 }
 
 
+.globalsongs section > a:hover{
+    filter: brightness(90%);
+}
+
+.globalsongs section > a:active{
+    filter: brightness(120%);
+}
+
+
 #notfound{
     width: 50vw;
     margin-left: auto;

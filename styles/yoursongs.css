@@ -27,6 +27,14 @@
 }
 
 
+.yoursongs section > a:hover{
+    filter: brightness(90%);
+}
+
+.yoursongs section > a:active{
+    filter: brightness(110%);
+}
+
 #notfound{
     width: 40vw;
     position: relative;

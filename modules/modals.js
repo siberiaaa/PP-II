@@ -233,21 +233,28 @@ export function OpenModalRate(){
         modalContent.appendChild(div);
         
         return new Promise(resolve => { //idk donde poner la promesa
-        const a = document.createElement('a');
-        a.innerHTML = 'Rate';
-        a.addEventListener('click', () => {
-            
-            document.documentElement.style.setProperty('--displaymodal', 'none');
-            const checked = document.querySelector('input[name="rating"]:checked');
-            if (checked == null){
-                resolve(0);
-            }else{
-                resolve(parseInt(checked.value));
-            }
-        });
-    
-        modalContent.appendChild(a);
-        document.documentElement.style.setProperty('--displaymodal', 'flex');
+            const a = document.createElement('a');
+            a.innerHTML = 'Rate';
+            a.addEventListener('click', () => {     
+                document.documentElement.style.setProperty('--displaymodal', 'none');
+                const checked = document.querySelector('input[name="rating"]:checked');
+                if (checked == null){
+                    resolve(0);
+                }else{
+                    resolve(parseInt(checked.value));
+                }
+            });
+
+            document.addEventListener("click", (e) => {
+                if (e.target.matches("article.modal")) {
+                    e.preventDefault(); 
+                    document.documentElement.style.setProperty('--displaymodal', 'none');
+                    resolve(null);
+                }
+            });
+
+            modalContent.appendChild(a);
+            document.documentElement.style.setProperty('--displaymodal', 'flex');
     });
 
 }
@@ -295,6 +302,7 @@ export function OpenModalAddSong(name, author){
     a1.classList.add('button-form');
     
     return new Promise(resolve => {
+
     a1.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -312,6 +320,14 @@ export function OpenModalAddSong(name, author){
         document.documentElement.style.setProperty('--displaymodal', 'none');
         resolve({namesong: name, authorsong: author});
     });  
+
+    document.addEventListener("click", (e) => {
+        if (e.target.matches("article.modal")) {
+            e.preventDefault(); 
+            document.documentElement.style.setProperty('--displaymodal', 'none');
+            resolve(null);
+        }
+    });
 
     form.appendChild(a1);
     modalContent.appendChild(form);
@@ -395,6 +411,19 @@ export function OpenModalOptions(){
         }
         });
     }
+
+    const li5 = document.querySelectorAll('.modal-content li')[4];
+    if(li5 != null){
+        li5.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(document.title == 'Home'){
+                location.href = './html/reports.html';
+            }else{
+                location.href = './reports.html';
+            }
+        });
+    }
+
 
 }
 
