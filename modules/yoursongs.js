@@ -95,7 +95,8 @@ async function LoadSongs(){
         return;
     }
 
-    if (list.length == 0) {
+    const tbody = document.querySelector("tbody");
+    if (tbody.childElementCount == 0) {
         const a = document.createElement('a');
         a.innerHTML = 'Click to add songs';
         a.setAttribute('id', 'notfound')
