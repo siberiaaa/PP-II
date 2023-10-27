@@ -1,11 +1,65 @@
-import {OpenModalOptions} from './modals.js';
+import {OpenModalOptions, SpinnerOn, SpinnerOff} from './modals.js';
 
-export function LoadAnyHeader(){
-    if(localStorage.getItem('pseudotoken') == null){
+export async function LoadAnyHeader(){
+    const pseudotoken = localStorage.getItem('pseudotoken');
+    if(pseudotoken == null){
         LoadHeaderNoLogged();
     }
     else{
         LoadHeaderLogged();
+
+            SpinnerOn();
+            const isadmin = await IsAdminAPI(pseudotoken)
+            SpinnerOff();
+           
+            if (isadmin){
+                const li = document.createElement('li');
+                li.innerHTML = 'Reports';
+
+                li.addEventListener('click', (e) => {
+                e.preventDefault();
+                if(document.title == 'Home'){
+                    location.href = './html/reports.html';
+                }else{
+                    location.href = './reports.html';
+                }
+                });
+
+                const ul = document.querySelector('header ul');
+                ul.appendChild(li);
+            }
+        
+        
+    }
+}
+
+
+export async function IsAdminAPI(pseudotoken) {
+    const response = await fetch(
+        "https://sa-east-1.aws.data.mongodb-api.com/app/musicapp-clxou/endpoint/userAdmin",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({id: pseudotoken})
+        }
+    );
+
+    if (response.status >= 500 && response.status <= 599) {
+        modals.OpenModalErrorReload(
+            `Error con el servidor\n${response.status}`
+        );
+        return;
+    }
+
+    const data = await response.json();
+
+    if (data["success"]) {
+        return data["admin"];
+    } else {
+        modals.OpenModalError(data["message"]);
+        return null;
     }
 }
 

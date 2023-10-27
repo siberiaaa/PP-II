@@ -112,7 +112,7 @@ export function OpenModalErrorReload(message){
     document.documentElement.style.setProperty('--displaymodal', 'flex');
 }
 
-export function OpenModalRate(userid, songid){
+export function OpenModalRate(){
     
         CreateModal(); 
         const modalContent = document.querySelector('.modal-content');
@@ -232,7 +232,7 @@ export function OpenModalRate(userid, songid){
             input4, label4, input3, label3, input2, label2, input1, label1);
         modalContent.appendChild(div);
         
-        return new Promise(resolve => {
+        return new Promise(resolve => { //idk donde poner la promesa
         const a = document.createElement('a');
         a.innerHTML = 'Rate';
         a.addEventListener('click', () => {
@@ -240,15 +240,82 @@ export function OpenModalRate(userid, songid){
             document.documentElement.style.setProperty('--displaymodal', 'none');
             const checked = document.querySelector('input[name="rating"]:checked');
             if (checked == null){
-                resolve({userid: userid, songid: songid, rating:0});
+                resolve(0);
             }else{
-                resolve({userid: userid, songid: songid, rating:parseInt(checked.value)});
+                resolve(parseInt(checked.value));
             }
         });
     
         modalContent.appendChild(a);
         document.documentElement.style.setProperty('--displaymodal', 'flex');
     });
+
+}
+
+export function OpenModalAddSong(name, author){
+    CreateModal();
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.classList.add('formadd');
+
+    const form = document.createElement('form');
+    form.addEventListener('submit', (e) => e.preventDefault());
+  
+
+    const label1 = document.createElement('label');
+    label1.htmlFor = 'name';
+    const input1 = document.createElement('input');
+    input1.type = 'text';
+    input1.name = 'name';
+    input1.placeholder = 'Song name';
+    if(name != ''){
+        input1.value = name;
+    }
+
+    label1.appendChild(input1);
+
+    const label2 = document.createElement('label');
+    label2.htmlFor = 'author';
+    const input2 = document.createElement('input');
+    input2.type = 'text';
+    input2.name = 'author';
+    input2.placeholder = 'Song author';
+    if(author != ''){
+        input2.value = author;
+    }
+
+    label2.appendChild(input2);
+
+    form.appendChild(label1);
+    form.appendChild(label2);
+
+    const a1 = document.createElement('a');
+    a1.setAttribute('href', '');
+    a1.setAttribute('draggable', 'false');
+    a1.innerHTML = 'Save';
+    a1.classList.add('button-form');
+    
+    return new Promise(resolve => {
+    a1.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const form = document.querySelector('form');
+        const data = new FormData(form);
+    
+        const name = data.get('name');
+        const author = data.get('author');
+    
+        if (!name || !author) {
+            OpenModalError('Fill all fields.');
+            return;
+        }
+        document.documentElement.style.setProperty('--displaymodal', 'none');
+        resolve({namesong: name, authorsong: author});
+    });  
+
+    form.appendChild(a1);
+    modalContent.appendChild(form);
+    document.documentElement.style.setProperty('--displaymodal', 'flex');
+    })
 
 }
 
@@ -328,4 +395,52 @@ export function OpenModalOptions(){
         });
     }
 
+}
+
+
+export function SpinnerOn(){
+    document.documentElement.style.setProperty('--displayspinner', 'flex');
+}
+
+export function SpinnerOff(){
+    document.documentElement.style.setProperty('--displayspinner', 'none');
+}
+
+
+async function AddReportAPI(user, log, time) {
+    const response = await fetch(
+        "https://sa-east-1.aws.data.mongodb-api.com/app/musicapp-clxou/endpoint/reports",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user: user, log: log, time: time }),
+        }
+    );
+
+    if (response.status >= 500 && response.status <= 599) {
+        modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        return;
+    }
+
+    const data = await response.json();
+
+    if (data["success"]) {
+        return true;
+    } else {
+        modals.OpenModalError(data["message"]);
+        return null;
+    }
+}
+
+export async function Report(error) {
+    const pseudotoken = localStorage.getItem('pseudotoken');
+    if(pseudotoken == null){
+        const reported = await AddReportAPI('no logged', error, Date.now());
+        
+    }else{
+        const reported = await AddReportAPI(pseudotoken, error, Date.now());
+    }
+    
 }

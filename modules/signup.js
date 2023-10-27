@@ -52,7 +52,9 @@ async function SignUp(e) {
         return;
     }
 
+    modals.SpinnerOn();
     const id = await SignUpAPI(name, user, pass);
+    modals.SpinnerOff();
 
     if (id != null) {
         form.reset();

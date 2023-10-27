@@ -1,9 +1,10 @@
 table{   
-    margin: 20px;
+    margin: 20px 0;
     background-color: rgb(27, 27, 27);
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
- 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 td, th {
@@ -34,4 +35,11 @@ tbody tr td a img:hover{
     
     filter: invert(60%);
 
+}
+
+@media (width <= 480px) {
+    th{
+       font-size: 0.7em;
+
+    }
 }

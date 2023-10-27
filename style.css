@@ -45,7 +45,9 @@ main {
 /* ----- mobile media queries -----*/
 
 @media (width <= 480px) {
-
+    main {
+        padding: 40px 20px;
+    }
 }
 
 /* ----- non mobile media queries -----*/

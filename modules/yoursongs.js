@@ -72,16 +72,31 @@ async function LoadSongs(){
         return;
     }
 
+    modals.SpinnerOn();
     const list = await LoadSongsAPI(pseudotoken);
+    modals.SpinnerOff();
   
     if (list != null) {
+        modals.SpinnerOn();
         for (let song of list){
                 const songdata = await GetSongAPI(song['songid']);
                 if(songdata != null){
                 AddSongTable(song['songid'], songdata['name'], songdata['author'], song['rating'], songdata['rating'])
                 }
         }
+        modals.SpinnerOff();
     }
+
+    if (list.length == 0) {
+        const a = document.createElement('a');
+        a.innerHTML = 'Click to add songs';
+        a.setAttribute('id', 'notfound')
+        a.setAttribute('href', './globalsongs.html')
+
+    const section = document.querySelector("section");
+    section.appendChild(a);
+    return;
+}
 
 }
 
@@ -112,16 +127,10 @@ function AddSongTable(id, name, author, rating, globalrating){
     img1.src = './../assets/star.png'; 
     img1.setAttribute('draggable', 'false');
     a1.appendChild(img1);
+
     a1.addEventListener('click', async (e) => {
         e.preventDefault();
-
-        const pseudotoken = localStorage.getItem('pseudotoken');
-        if(localStorage.getItem('pseudotoken') == null){
-            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
-            return;
-        }
-        const valuesfromodal = await modals.OpenModalRate(pseudotoken, id);
-        console.log(valuesfromodal);
+        RateSong(id);
     });
         
 
@@ -133,12 +142,8 @@ function AddSongTable(id, name, author, rating, globalrating){
     img2.setAttribute('draggable', 'false');
     a2.appendChild(img2);
     a2.addEventListener('click', (e) => {
-        const pseudotoken = localStorage.getItem('pseudotoken');
-        if(localStorage.getItem('pseudotoken') == null){
-            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
-            return;
-        }
-        DeleteSong(e, pseudotoken, id)})
+        DeleteSong(e, id);
+    })
 
     td5.appendChild(a1);
     td5.appendChild(a2);
@@ -153,10 +158,18 @@ function AddSongTable(id, name, author, rating, globalrating){
     tbody.appendChild(tr);
 }
 
-async function DeleteSong(e, userid, songid){
+async function DeleteSong(e, songid){
     e.preventDefault();
 
-    const deleted = await DeleteSongAPI(userid, songid);
+    const pseudotoken = localStorage.getItem('pseudotoken');
+        if(localStorage.getItem('pseudotoken') == null){
+            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            return;
+        }
+
+    modals.SpinnerOn();
+    const deleted = await DeleteSongAPI(pseudotoken, songid);
+    modals.SpinnerOff();
   
     if (deleted) {
         modals.OpenModalButtonHref('Deleted successfully', './yoursongs.html');
@@ -192,15 +205,23 @@ async function DeleteSongAPI(userid, songid){
 }
 
 
-export  async function RateSong(userid, songid, rating){
-    console.log('holaaaa', userid, songid, rating)
-    /*
-    const rated = await DeleteSongAPI(userid, songid);
-  
+async function RateSong(songid){
+    const pseudotoken = localStorage.getItem('pseudotoken');
+        if(localStorage.getItem('pseudotoken') == null){
+            modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            return;
+        }
+
+        const ratingfromodal = await modals.OpenModalRate();
+        
+        modals.SpinnerOn();
+        const rated = await RateSongAPI(pseudotoken, songid, ratingfromodal);
+        modals.SpinnerOff();
+
     if (rated) {
         modals.OpenModalButtonHref('Rated successfully', './yoursongs.html');
     }
-*/
+
 }
 
 async function RateSongAPI(userid, songid, rating){

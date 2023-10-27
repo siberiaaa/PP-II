@@ -51,7 +51,9 @@ async function LogIn(e) {
         return;
     }
 
+    modals.SpinnerOn();
     const id = await LogInAPI(user, pass);
+    modals.SpinnerOff();
 
     if (id != null) {
         form.reset();

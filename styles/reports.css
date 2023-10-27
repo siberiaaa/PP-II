@@ -1,0 +1,11 @@
+.reports h1{
+    color: rgb(235, 235, 235);
+}
+
+.reports section{
+    width: 100%;
+}
+
+.reports section.search{
+    height: 14vh;
+}

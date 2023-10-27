@@ -34,7 +34,7 @@ article.modalspinner{
 .spinner {
     display: inline-block;
     border: 10px solid rgba(255, 255, 255, 0.199);
-    border-left-color: #b255ff;
+    border-left-color: #f5b834;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -197,43 +197,6 @@ section.headermenu{
 }
 
 
-/* ----- modal form -----*/
-.modal-content.article-form {
-    height: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    background: rgba(255, 255, 255, 0.781);
-    border-radius: 20px;
-    
-}
-
-.modal-content.article-form form {
-    row-gap: 20px;
-}
-
-.modal-content.article-form form input{
-    background: rgb(241, 241, 241);
-}
-
-/*non specific media queries*/
-
-@media (width <= 955px) {
-
-    }
-
-
-/*mobile media queries*/
-
-@media (width <= 480px) {
-
-}
-
-
-
-
-
 /* ----- non specific media queries -----*/
 
 @media (width <= 955px) {
@@ -254,10 +217,23 @@ section.headermenu{
     }
 }
 
+/* ----- modal add song -----*/
+section.modal-content.formadd {
+    background-color: #b255ff00;
+    height: 50vh;
+
+}
 
 
+h1.modal-content.formadd {
+    color: #b255ff00;
+}
 
-
+@media (width >= 480px) {
+    .modal-content.formadd label{
+        font-size: 1.3em;
+    }
+}
 
 
 
@@ -269,6 +245,13 @@ section.headermenu{
     border: none;
     float: left;
   }
+
+  @media (width <= 480px) {
+    .rating{
+       font-size: 0.69em;
+
+    }
+}
   
   .rating > label {
     color: #90A0A3;
