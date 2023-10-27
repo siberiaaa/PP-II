@@ -50,6 +50,7 @@ export async function IsAdminAPI(pseudotoken) {
         modals.OpenModalErrorReload(
             `Error con el servidor\n${response.status}`
         );
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -59,6 +60,7 @@ export async function IsAdminAPI(pseudotoken) {
         return data["admin"];
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }

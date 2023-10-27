@@ -24,6 +24,7 @@ async function LogInAPI(user, pass) {
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -33,6 +34,7 @@ async function LogInAPI(user, pass) {
         return data["id"];
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
@@ -48,6 +50,7 @@ async function LogIn(e) {
 
     if (!user || !pass) {
         modals.OpenModalError("Fill all fields");
+        modals.Report(`Fill all fields`);
         return;
     }
 

@@ -24,6 +24,7 @@ async function SignUpAPI(name, user, pass) {
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -33,6 +34,7 @@ async function SignUpAPI(name, user, pass) {
         return data["result"]["insertedId"];
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
@@ -49,6 +51,7 @@ async function SignUp(e) {
 
     if (!name || !user || !pass) {
         modals.OpenModalError("Fill all fields");
+        modals.Report(`Fill all fields`);
         return;
     }
 

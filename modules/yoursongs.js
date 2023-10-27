@@ -23,6 +23,7 @@ async function LoadSongsAPI(userid) {
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -32,6 +33,7 @@ async function LoadSongsAPI(userid) {
         return [...data["list"]];
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
@@ -50,6 +52,7 @@ export async function GetSongAPI(songid){
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -61,6 +64,7 @@ export async function GetSongAPI(songid){
         return null;
     }else{
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
@@ -69,6 +73,7 @@ async function LoadSongs(){
     const pseudotoken = localStorage.getItem('pseudotoken');
     if(localStorage.getItem('pseudotoken') == null){
         modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+        modals.Report(`You must be logged to perform this action.`);
         return;
     }
 
@@ -85,6 +90,9 @@ async function LoadSongs(){
                 }
         }
         modals.SpinnerOff();
+    }
+    else{
+        return;
     }
 
     if (list.length == 0) {
@@ -164,6 +172,7 @@ async function DeleteSong(e, songid){
     const pseudotoken = localStorage.getItem('pseudotoken');
         if(localStorage.getItem('pseudotoken') == null){
             modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            modals.Report(`You must be logged to perform this action.`);
             return;
         }
 
@@ -191,6 +200,7 @@ async function DeleteSongAPI(userid, songid){
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -200,6 +210,7 @@ async function DeleteSongAPI(userid, songid){
         return true;
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
@@ -209,6 +220,7 @@ async function RateSong(songid){
     const pseudotoken = localStorage.getItem('pseudotoken');
         if(localStorage.getItem('pseudotoken') == null){
             modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+            modals.Report(`You must be logged to perform this action.`);
             return;
         }
 
@@ -238,6 +250,7 @@ async function RateSongAPI(userid, songid, rating){
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -247,6 +260,7 @@ async function RateSongAPI(userid, songid, rating){
         return true;
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }

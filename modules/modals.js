@@ -306,6 +306,7 @@ export function OpenModalAddSong(name, author){
     
         if (!name || !author) {
             OpenModalError('Fill all fields.');
+            modals.Report(`Fill all fields`);
             return;
         }
         document.documentElement.style.setProperty('--displaymodal', 'none');
@@ -421,6 +422,7 @@ async function AddReportAPI(user, log, time) {
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -430,6 +432,7 @@ async function AddReportAPI(user, log, time) {
         return true;
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }

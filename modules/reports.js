@@ -13,6 +13,7 @@ async function LoadReports(){
     const pseudotoken = localStorage.getItem('pseudotoken');
     if(localStorage.getItem('pseudotoken') == null){
         modals.OpenModalErrorReload(`You must be logged to perform this action.`);
+        modals.Report(`You must be logged to perform this action.`);
         return;
     }
     
@@ -21,6 +22,7 @@ async function LoadReports(){
     modals.SpinnerOff();
         if (!isadmin){
             modals.OpenModalErrorReload(`You must be admin to perform this action.`);
+            modals.Report(`You must be admin to perform this action.`);
             return;
         }
 
@@ -56,6 +58,7 @@ async function LoadReportsAPI(userid) {
 
     if (response.status >= 500 && response.status <= 599) {
         modals.OpenModalErrorReload(`Error con el servidor\n${response.status}`);
+        modals.Report(`Error con el servidor\n${response.status}`);
         return;
     }
 
@@ -65,6 +68,7 @@ async function LoadReportsAPI(userid) {
         return [...data["reports"]];
     } else {
         modals.OpenModalError(data["message"]);
+        modals.Report(data["message"]);
         return null;
     }
 }
